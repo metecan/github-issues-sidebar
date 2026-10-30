@@ -2,7 +2,7 @@
 
 Browse GitHub issues in the VS Code sidebar, read them in full, and hand them to an AI agent by drag and drop or as Markdown.
 
-![Detailed cards next to the one-line list, the two sidebar styles](images/00-cards-and-list.png)
+![Detailed cards next to the one-line list, the two sidebar styles](https://raw.githubusercontent.com/metecan/github-issues-sidebar/refs/heads/main/images/00-cards-and-list.png)
 
 ## Features
 
@@ -21,7 +21,7 @@ Open the **GitHub Issues** icon in the activity bar.
 - If `gh` is logged out, choose **Log In with GitHub CLI**.
 - If you don't use `gh`, choose **Sign In with VS Code**.
 
-![Sign-in options shown in the sidebar](images/07-sign-in.png)
+![Sign-in options shown in the sidebar](https://raw.githubusercontent.com/metecan/github-issues-sidebar/refs/heads/main/images/07-sign-in.png)
 
 Repositories are detected from your workspace's git remotes. Forks show the parent repository's issues. To add others, use **Add Repository…** in the view's `…` menu.
 
@@ -29,7 +29,7 @@ Repositories are detected from your workspace's git remotes. Forks show the pare
 
 Switch with the button in the view's title bar, or with the `ghIssues.issueStyle` setting.
 
-![Detailed cards in the sidebar](images/02-cards.png)
+![Detailed cards in the sidebar](https://raw.githubusercontent.com/metecan/github-issues-sidebar/refs/heads/main/images/02-cards.png)
 
 | | One-line list (default) | Detailed cards |
 |---|---|---|
@@ -42,7 +42,7 @@ VS Code only allows dragging from its native one-line rows, so use the list styl
 
 Both styles follow your color theme.
 
-![Detailed cards in a light theme](images/06-light-theme.png)
+![Detailed cards in a light theme](https://raw.githubusercontent.com/metecan/github-issues-sidebar/refs/heads/main/images/06-light-theme.png)
 
 ## Drag and drop
 
@@ -56,9 +56,9 @@ In the one-line list, drag an issue or a multi-selection onto any of these.
 | An editor, without Shift | No | Opens the issue as a Markdown file |
 | A terminal | No | Pastes the path to the issue's Markdown file |
 
-![An issue attached to the chat input](images/03-drag-to-agent.png)
+![An issue attached to the chat input](https://raw.githubusercontent.com/metecan/github-issues-sidebar/refs/heads/main/images/03-drag-to-agent.png)
 
-![An issue dropped into a Markdown file](images/04-drop-into-editor.png)
+![An issue dropped into a Markdown file](https://raw.githubusercontent.com/metecan/github-issues-sidebar/refs/heads/main/images/04-drop-into-editor.png)
 
 Each dragged issue is written to a Markdown file in the extension's storage folder, which is what lets agents accept it. The Explorer doesn't accept drops from other views.
 
@@ -66,9 +66,9 @@ Each dragged issue is written to a Markdown file in the extension's storage fold
 
 Click an issue to read it. The toolbar stays in view as you scroll, with **Copy as Markdown**, **Copy URL**, **Open on GitHub** and **Refresh**.
 
-![An issue open beside the list](images/01-list-and-details.png)
+![An issue open beside the list](https://raw.githubusercontent.com/metecan/github-issues-sidebar/refs/heads/main/images/01-list-and-details.png)
 
-![An issue's comments, with the Copy as Markdown button confirming the copy](images/05-issue-details.png)
+![An issue's comments, with the Copy as Markdown button confirming the copy](https://raw.githubusercontent.com/metecan/github-issues-sidebar/refs/heads/main/images/05-issue-details.png)
 
 ## Settings
 
