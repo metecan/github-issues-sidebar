@@ -2,7 +2,7 @@
   "name": "github-issues-sidebar",
   "displayName": "GitHub Issues Sidebar",
   "description": "Browse GitHub issues in the sidebar, read them in full, and hand them to AI agents by drag and drop or as Markdown.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "metecan",
   "license": "MIT",
   "icon": "media/icon.png",
