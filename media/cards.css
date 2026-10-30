@@ -1,0 +1,345 @@
+:root {
+  --border: var(--vscode-widget-border, var(--vscode-panel-border, rgba(128, 128, 128, 0.28)));
+  --muted: var(--vscode-descriptionForeground);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--vscode-foreground);
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+  line-height: 1.4;
+}
+
+.icon {
+  display: inline-flex;
+  flex: none;
+}
+
+.icon svg {
+  display: block;
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 4px 10px 10px;
+}
+
+.card {
+  position: relative;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--vscode-editorWidget-background);
+  cursor: pointer;
+  user-select: none;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 92px;
+  transition: background-color 100ms ease, border-color 100ms ease;
+}
+
+.card:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+
+.card.selected {
+  border-color: var(--vscode-focusBorder);
+  background: var(--vscode-list-inactiveSelectionBackground);
+}
+
+.card:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder);
+  outline-offset: -1px;
+}
+
+.card-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 20px;
+  color: var(--muted);
+  font-size: 0.92em;
+}
+
+.state svg {
+  width: 14px;
+  height: 14px;
+}
+
+.state.open {
+  color: var(--vscode-charts-green);
+}
+
+.state.closed {
+  color: var(--vscode-charts-purple);
+}
+
+.state.not-planned {
+  color: var(--muted);
+}
+
+.number {
+  flex: none;
+  color: var(--vscode-foreground);
+  font-weight: 600;
+}
+
+.dash {
+  flex: none;
+}
+
+/* Wrapped labels fall out of view whole, instead of being cut mid-word. */
+.tags {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 8px;
+  min-width: 0;
+  height: 1.4em;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.tags .icon {
+  margin-right: -4px;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.tags .label {
+  max-width: 100%;
+}
+
+.label-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.tag-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.age {
+  flex: none;
+  margin-left: auto;
+  padding-left: 8px;
+}
+
+.card:hover .age,
+.card:focus-within .age {
+  visibility: hidden;
+}
+
+.card-actions {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  display: none;
+  gap: 1px;
+  padding-left: 4px;
+  border-radius: 4px;
+  background: var(--vscode-editorWidget-background);
+}
+
+.card:hover .card-actions,
+.card:focus-within .card-actions {
+  display: flex;
+}
+
+.card-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  color: var(--vscode-icon-foreground);
+  background: transparent;
+  cursor: pointer;
+}
+
+.card-action:hover {
+  background: var(--vscode-toolbar-hoverBackground);
+}
+
+.card-action:focus-visible,
+.group-header:focus-visible,
+.group-remove:focus-visible,
+.text-button:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder);
+  outline-offset: -1px;
+}
+
+.card-action .icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.card-action .confirmed,
+.card-action.done .idle {
+  display: none;
+}
+
+.card-action.done .confirmed {
+  display: inline-flex;
+  color: var(--vscode-charts-green);
+}
+
+.card-title {
+  display: -webkit-box;
+  margin-top: 3px;
+  overflow: hidden;
+  font-weight: 500;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.card-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.86em;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.86em;
+  white-space: nowrap;
+}
+
+.meta-item {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 3px;
+}
+
+.meta-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.repo {
+  margin-left: auto;
+}
+
+.group-row {
+  display: flex;
+  align-items: center;
+}
+
+.group-header {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  min-width: 0;
+  padding: 5px 10px;
+  border: 0;
+  color: var(--vscode-foreground);
+  background: transparent;
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.group-header:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+
+.chevron svg {
+  transition: transform 100ms ease;
+}
+
+.chevron.open svg {
+  transform: rotate(90deg);
+}
+
+.group-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.group-count {
+  flex: none;
+  color: var(--muted);
+  font-weight: normal;
+}
+
+.group-remove {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  color: var(--vscode-icon-foreground);
+  background: transparent;
+  cursor: pointer;
+}
+
+.group-remove:hover {
+  background: var(--vscode-toolbar-hoverBackground);
+}
+
+.message {
+  padding: 8px 4px;
+  color: var(--muted);
+}
+
+.message.error {
+  color: var(--vscode-errorForeground);
+}
+
+.text-button {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--vscode-foreground);
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.text-button:hover {
+  background: var(--vscode-toolbar-hoverBackground);
+}

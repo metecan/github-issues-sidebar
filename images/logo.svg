@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>GitHub Issues Sidebar</title>
+  <defs>
+    <clipPath id="tile">
+      <rect width="512" height="512" rx="112"/>
+    </clipPath>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#06205E" flood-opacity=".45"/>
+    </filter>
+  </defs>
+  <g clip-path="url(#tile)">
+    <rect width="512" height="512" fill="#2B6CF0"/>
+    <rect width="176" height="512" fill="#123C9E"/>
+    <g fill="#5B8DF5">
+      <rect x="46" y="66" width="84" height="24" rx="12"/>
+      <rect x="46" y="112" width="84" height="24" rx="12"/>
+      <rect x="46" y="376" width="84" height="24" rx="12"/>
+      <rect x="46" y="422" width="84" height="24" rx="12"/>
+    </g>
+    <g transform="rotate(7 272 256)">
+      <rect x="92" y="148" width="360" height="216" rx="46" fill="#fff" filter="url(#lift)"/>
+      <path d="M167.8 202L157 310M211 202L200.2 310M132.16 234.4H240.16M127.84 277.6H235.84" fill="none" stroke="#2B6CF0" stroke-width="22" stroke-linecap="round"/>
+      <rect x="268" y="210" width="138" height="30" rx="15" fill="#123C9E"/>
+      <rect x="268" y="272" width="94" height="30" rx="15" fill="#B9CCF7"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,382 @@
+{
+  "name": "github-issues-sidebar",
+  "displayName": "GitHub Issues Sidebar",
+  "description": "Browse GitHub issues in the sidebar, read them in full, and hand them to AI agents by drag and drop or as Markdown.",
+  "version": "0.1.0",
+  "publisher": "metecan",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#0B1220",
+    "theme": "dark"
+  },
+  "pricing": "Free",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/metecan/github-issues-sidebar.git"
+  },
+  "homepage": "https://github.com/metecan/github-issues-sidebar#readme",
+  "bugs": {
+    "url": "https://github.com/metecan/github-issues-sidebar/issues"
+  },
+  "private": true,
+  "engines": {
+    "vscode": "^1.97.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "keywords": [
+    "github",
+    "issues",
+    "gh",
+    "github cli",
+    "ai",
+    "agent",
+    "copilot",
+    "claude",
+    "markdown",
+    "drag and drop"
+  ],
+  "main": "./dist/extension.js",
+  "capabilities": {
+    "virtualWorkspaces": false,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ghIssues",
+          "title": "GitHub Issues",
+          "icon": "media/issues.svg"
+        }
+      ]
+    },
+    "views": {
+      "ghIssues": [
+        {
+          "id": "ghIssues.repoIssues",
+          "name": "Repository Issues",
+          "icon": "media/issues.svg",
+          "when": "ghIssues.issueStyle != cards || ghIssues.authState != signedIn || ghIssues.noRepositories"
+        },
+        {
+          "id": "ghIssues.repoCards",
+          "type": "webview",
+          "name": "Repository Issues",
+          "icon": "media/issues.svg",
+          "when": "ghIssues.issueStyle == cards && ghIssues.authState == signedIn && !ghIssues.noRepositories"
+        },
+        {
+          "id": "ghIssues.myIssues",
+          "name": "My Issues",
+          "icon": "media/issues.svg",
+          "when": "ghIssues.authState == signedIn && ghIssues.issueStyle != cards"
+        },
+        {
+          "id": "ghIssues.myCards",
+          "type": "webview",
+          "name": "My Issues",
+          "icon": "media/issues.svg",
+          "when": "ghIssues.authState == signedIn && ghIssues.issueStyle == cards"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "ghIssues.repoIssues",
+        "contents": "Looking for the GitHub CLI…",
+        "when": "ghIssues.authState != signedIn && ghIssues.authState != signedOut"
+      },
+      {
+        "view": "ghIssues.repoIssues",
+        "contents": "GitHub CLI is installed but not logged in.\n[Log In with GitHub CLI](command:ghIssues.loginWithGh)\n[Sign In with VS Code](command:ghIssues.loginWithVSCode)",
+        "when": "ghIssues.authState == signedOut && ghIssues.ghInstalled"
+      },
+      {
+        "view": "ghIssues.repoIssues",
+        "contents": "GitHub CLI (gh) was not found. Sign in to GitHub to continue.\n[Sign In with VS Code](command:ghIssues.loginWithVSCode)\nPrefer the CLI? [Install GitHub CLI](https://cli.github.com), then press refresh.\n[Check Again](command:ghIssues.refresh)",
+        "when": "ghIssues.authState == signedOut && !ghIssues.ghInstalled"
+      },
+      {
+        "view": "ghIssues.repoIssues",
+        "contents": "No GitHub repository was found in this workspace.\n[Add Repository](command:ghIssues.addRepository)",
+        "when": "ghIssues.authState == signedIn && ghIssues.noRepositories"
+      }
+    ],
+    "commands": [
+      {
+        "command": "ghIssues.refresh",
+        "title": "Refresh",
+        "category": "GitHub Issues",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "ghIssues.setStateFilter",
+        "title": "Filter by State…",
+        "category": "GitHub Issues",
+        "icon": "$(filter)"
+      },
+      {
+        "command": "ghIssues.search",
+        "title": "Search Issues…",
+        "category": "GitHub Issues",
+        "icon": "$(search)"
+      },
+      {
+        "command": "ghIssues.clearSearch",
+        "title": "Clear Search",
+        "category": "GitHub Issues",
+        "icon": "$(clear-all)"
+      },
+      {
+        "command": "ghIssues.addRepository",
+        "title": "Add Repository…",
+        "category": "GitHub Issues",
+        "icon": "$(add)"
+      },
+      {
+        "command": "ghIssues.removeRepository",
+        "title": "Remove Repository",
+        "category": "GitHub Issues",
+        "icon": "$(close)"
+      },
+      {
+        "command": "ghIssues.openIssue",
+        "title": "Open Issue Details",
+        "category": "GitHub Issues",
+        "icon": "$(open-preview)"
+      },
+      {
+        "command": "ghIssues.copyAsMarkdown",
+        "title": "Copy as Markdown",
+        "category": "GitHub Issues",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "ghIssues.copyUrl",
+        "title": "Copy URL",
+        "category": "GitHub Issues",
+        "icon": "$(link)"
+      },
+      {
+        "command": "ghIssues.openOnGitHub",
+        "title": "Open on GitHub",
+        "category": "GitHub Issues",
+        "icon": "$(link-external)"
+      },
+      {
+        "command": "ghIssues.loadMore",
+        "title": "Load More Issues",
+        "category": "GitHub Issues"
+      },
+      {
+        "command": "ghIssues.loginWithGh",
+        "title": "Log In with GitHub CLI",
+        "category": "GitHub Issues"
+      },
+      {
+        "command": "ghIssues.loginWithVSCode",
+        "title": "Sign In with VS Code",
+        "category": "GitHub Issues"
+      },
+      {
+        "command": "ghIssues.useCards",
+        "title": "Show as Detailed Cards",
+        "category": "GitHub Issues",
+        "icon": "$(layers)"
+      },
+      {
+        "command": "ghIssues.useList",
+        "title": "Show as One-Line List (Drag and Drop)",
+        "category": "GitHub Issues",
+        "icon": "$(list-flat)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "ghIssues.search",
+          "when": "view =~ /^ghIssues\\./ && ghIssues.authState == signedIn",
+          "group": "navigation@1"
+        },
+        {
+          "command": "ghIssues.clearSearch",
+          "when": "view =~ /^ghIssues\\./ && ghIssues.searchActive",
+          "group": "navigation@2"
+        },
+        {
+          "command": "ghIssues.setStateFilter",
+          "when": "view =~ /^ghIssues\\./ && ghIssues.authState == signedIn",
+          "group": "navigation@3"
+        },
+        {
+          "command": "ghIssues.addRepository",
+          "when": "view =~ /^ghIssues\\.repo/ && ghIssues.authState == signedIn",
+          "group": "1_repositories"
+        },
+        {
+          "command": "ghIssues.useCards",
+          "when": "view =~ /^ghIssues\\./ && ghIssues.authState == signedIn && ghIssues.issueStyle != cards",
+          "group": "navigation@4"
+        },
+        {
+          "command": "ghIssues.useList",
+          "when": "view =~ /^ghIssues\\./ && ghIssues.authState == signedIn && ghIssues.issueStyle == cards",
+          "group": "navigation@4"
+        },
+        {
+          "command": "ghIssues.refresh",
+          "when": "view =~ /^ghIssues\\./",
+          "group": "navigation@5"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "ghIssues.copyAsMarkdown",
+          "when": "viewItem == issue",
+          "group": "inline@1"
+        },
+        {
+          "command": "ghIssues.copyUrl",
+          "when": "viewItem == issue",
+          "group": "inline@2"
+        },
+        {
+          "command": "ghIssues.openOnGitHub",
+          "when": "viewItem == issue",
+          "group": "inline@3"
+        },
+        {
+          "command": "ghIssues.openIssue",
+          "when": "viewItem == issue",
+          "group": "1_open@1"
+        },
+        {
+          "command": "ghIssues.openOnGitHub",
+          "when": "viewItem == issue",
+          "group": "1_open@2"
+        },
+        {
+          "command": "ghIssues.copyAsMarkdown",
+          "when": "viewItem == issue",
+          "group": "2_copy@1"
+        },
+        {
+          "command": "ghIssues.copyUrl",
+          "when": "viewItem == issue",
+          "group": "2_copy@2"
+        },
+        {
+          "command": "ghIssues.removeRepository",
+          "when": "viewItem == repository.manual",
+          "group": "inline"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "ghIssues.openIssue",
+          "when": "false"
+        },
+        {
+          "command": "ghIssues.openOnGitHub",
+          "when": "false"
+        },
+        {
+          "command": "ghIssues.copyAsMarkdown",
+          "when": "false"
+        },
+        {
+          "command": "ghIssues.copyUrl",
+          "when": "false"
+        },
+        {
+          "command": "ghIssues.removeRepository",
+          "when": "false"
+        },
+        {
+          "command": "ghIssues.loadMore",
+          "when": "false"
+        },
+        {
+          "command": "ghIssues.clearSearch",
+          "when": "ghIssues.searchActive"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "ghIssues.copyAsMarkdown",
+        "key": "ctrl+c",
+        "mac": "cmd+c",
+        "when": "focusedView =~ /^ghIssues\\.(repo|my)Issues$/ && !inputFocus"
+      }
+    ],
+    "configuration": {
+      "title": "GitHub Issues",
+      "properties": {
+        "ghIssues.repositories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[\\w.-]+/[\\w.-]+$",
+            "patternErrorMessage": "Use the owner/name form."
+          },
+          "default": [],
+          "description": "Extra repositories to list, as owner/name, alongside the ones detected from your workspace git remotes."
+        },
+        "ghIssues.maxIssuesPerList": {
+          "type": "number",
+          "default": 1000,
+          "minimum": 100,
+          "description": "How many issues each list loads automatically. Lists with more issues show a Load More item."
+        },
+        "ghIssues.includeComments": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include comments when issues are copied or dragged as Markdown."
+        },
+        "ghIssues.ghPath": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "Path to the gh executable. Leave empty to find it on your PATH and in the usual install locations."
+        },
+        "ghIssues.issueStyle": {
+          "type": "string",
+          "enum": [
+            "list",
+            "cards"
+          ],
+          "default": "list",
+          "enumDescriptions": [
+            "One-line native rows that drag into editors, terminals and AI agent inputs.",
+            "Detailed two-line cards with copy actions. VS Code cannot drag out of these."
+          ],
+          "description": "How issues are shown in the sidebar."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "pnpm build:extension && pnpm build:webview",
+    "build:extension": "esbuild src/extension.ts --bundle --platform=node --format=cjs --target=node20 --external:vscode --sourcemap --outfile=dist/extension.js",
+    "build:webview": "esbuild src/webview/cards.ts src/webview/detail.ts --bundle --platform=browser --format=iife --target=es2022 --outdir=dist/webview",
+    "watch": "pnpm build:extension --watch & pnpm build:webview --watch & wait",
+    "typecheck": "tsc --noEmit",
+    "test": "esbuild test/*.test.ts --bundle --platform=node --format=cjs --target=node20 --outdir=out/test --log-level=warning && node --test \"out/test/*.test.js\"",
+    "package": "pnpm build:extension --minify && pnpm build:webview --minify && vsce package --no-dependencies",
+    "marketplace:publish": "pnpm build:extension --minify && pnpm build:webview --minify && vsce publish --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "1.97.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.28.0",
+    "typescript": "^7.0.0"
+  }
+}
